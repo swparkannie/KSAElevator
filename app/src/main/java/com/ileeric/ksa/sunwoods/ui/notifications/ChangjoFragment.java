@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,13 +41,13 @@ public class ChangjoFragment extends Fragment {
     TextView C7 = null;
     TextView C8 = null;
     ImageView C_E=null;
+    Button inputDone;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ChangjoViewModel changjoViewModel =
                 new ViewModelProvider(this).get(ChangjoViewModel.class);
-
         binding = FragmentChangjoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         C1 = (TextView) root.findViewById(R.id.C_Num1);
@@ -58,11 +59,17 @@ public class ChangjoFragment extends Fragment {
         C7 = (TextView) root.findViewById(R.id.C_Num7);
         C8 = (TextView) root.findViewById(R.id.C_Num8);
         C_E= (ImageView) root.findViewById(R.id.C_E);
+        inputDone = (Button) root.findViewById(R.id.C_reset);
 
         ChangjoTask apiTask = new ChangjoTask("changjo");
-
         apiTask.execute();
-
+        inputDone.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ChangjoTask apiTask = new ChangjoTask("changjo");
+                apiTask.execute();
+            }
+        });
         return root;
     }
     class ChangjoTask extends AsyncTask<Integer, Void, Boolean> {
@@ -137,17 +144,17 @@ public class ChangjoFragment extends Fragment {
             C8.setText(C_data.get(10).toString());
 
             C_sto = C_data.get(0).toString();
-            Elv_Bias = -0.1511*(Integer.parseInt(C_sto))+1.0548;
+            Elv_Bias = -0.1198*(Integer.parseInt(C_sto))+1.1339;
             View myView = root.findViewById(R.id.C_E);
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) myView.getLayoutParams();
             params.verticalBias = (float) Elv_Bias;
             myView.setLayoutParams(params);
-            if (Integer.parseInt(C_data.get(0).toString())<=4){
-                C_E.setColorFilter(R.color.green);
-            }else if (Integer.parseInt(C_data.get(0).toString())>=10){
-                C_E.setColorFilter(R.color.red);
+            if (Integer.parseInt(C_data.get(1).toString())<=4){
+                C_E.setImageResource(R.drawable.baseline_elevator_24_blue);
+            }else if (Integer.parseInt(C_data.get(1).toString())>=10){
+                C_E.setImageResource(R.drawable.baseline_elevator_24_red);
             }else{
-                C_E.setColorFilter(R.color.yellow);
+                C_E.setImageResource(R.drawable.baseline_elevator_24_yellow);
             }
         }
 

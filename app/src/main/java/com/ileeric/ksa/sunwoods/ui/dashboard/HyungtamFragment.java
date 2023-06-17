@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,6 +39,8 @@ public class HyungTamFragment extends Fragment {
     TextView H5 = null;
     TextView H6 = null;
     ImageView H_E=null;
+    Button inputDone;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,13 +56,20 @@ public class HyungTamFragment extends Fragment {
         H5 = (TextView) root.findViewById(R.id.H_Num4);
         H6 = (TextView) root.findViewById(R.id.H_NumR);
         H_E = (ImageView) root.findViewById(R.id.H_E);
-
+        inputDone = (Button) root.findViewById(R.id.T_reset);
 
         HyungtamTask apiTask = new HyungtamTask("Tamgu");
 
         apiTask.execute();
-
+        inputDone.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HyungTamFragment.HyungtamTask apiTask = new HyungTamFragment.HyungtamTask("Tamgu");
+                apiTask.execute();
+            }
+        });
         return root;
+
     }
     class HyungtamTask extends AsyncTask<Integer, Void, Boolean> {
         // Variable to store url
@@ -131,19 +141,18 @@ public class HyungTamFragment extends Fragment {
             H6.setText(T_data.get(8).toString());
 
             H_sto = T_data.get(0).toString();
-            Elv_Bias = -0.1511*(Integer.parseInt(H_sto))+1.0548;
+            Elv_Bias = -0.1331*(Integer.parseInt(H_sto))+1.1321;
             View myView = root.findViewById(R.id.H_E);
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) myView.getLayoutParams();
             params.verticalBias = (float) Elv_Bias;
             myView.setLayoutParams(params);
-            if (Integer.parseInt(T_data.get(0).toString())<=4){
-                H_E.setColorFilter(R.color.green);
-            }else if (Integer.parseInt(T_data.get(0).toString())>=10){
-                H_E.setColorFilter(R.color.red);
+            if (Integer.parseInt(T_data.get(1).toString())<=4){
+                H_E.setImageResource(R.drawable.baseline_elevator_24_blue);
+            }else if (Integer.parseInt(T_data.get(1).toString())>=10){
+                H_E.setImageResource(R.drawable.baseline_elevator_24_red);
             }else{
-                H_E.setColorFilter(R.color.yellow);
+                H_E.setImageResource(R.drawable.baseline_elevator_24_yellow);
             }
-
         }
     }
 
