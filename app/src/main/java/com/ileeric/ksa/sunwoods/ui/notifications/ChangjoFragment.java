@@ -6,9 +6,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -25,6 +27,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class ChangjoFragment extends Fragment {
+    double Elv_Bias =0;
+    String C_sto="";
 
     private FragmentChangjoBinding binding;
     TextView C1 = null;
@@ -35,7 +39,7 @@ public class ChangjoFragment extends Fragment {
     TextView C6 = null;
     TextView C7 = null;
     TextView C8 = null;
-
+    ImageView C_E=null;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -53,6 +57,7 @@ public class ChangjoFragment extends Fragment {
         C6 = (TextView) root.findViewById(R.id.C_Num6);
         C7 = (TextView) root.findViewById(R.id.C_Num7);
         C8 = (TextView) root.findViewById(R.id.C_Num8);
+        C_E= (ImageView) root.findViewById(R.id.C_E);
 
         ChangjoTask apiTask = new ChangjoTask("changjo");
 
@@ -102,6 +107,7 @@ public class ChangjoFragment extends Fragment {
                 JSONObject inElevator = changjo.getJSONObject("inElevator");
                 C_data.add(Integer.parseInt(inElevator.getString("sto")));
                 C_data.add(Integer.parseInt(inElevator.getString("ppl")));
+                C_data.add(Integer.parseInt(inElevator.getString("drc")));
                 C_data.add(Integer.parseInt(changjo.getString("C1")));
                 C_data.add(Integer.parseInt(changjo.getString("C2")));
                 C_data.add(Integer.parseInt(changjo.getString("C3")));
@@ -120,16 +126,29 @@ public class ChangjoFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Boolean result) {
+            View root = binding.getRoot();
+            C1.setText(C_data.get(3).toString());
+            C2.setText(C_data.get(4).toString());
+            C3.setText(C_data.get(5).toString());
+            C4.setText(C_data.get(6).toString());
+            C5.setText(C_data.get(7).toString());
+            C6.setText(C_data.get(8).toString());
+            C7.setText(C_data.get(9).toString());
+            C8.setText(C_data.get(10).toString());
 
-            C1.setText(C_data.get(2).toString());
-            C2.setText(C_data.get(3).toString());
-            C3.setText(C_data.get(4).toString());
-            C4.setText(C_data.get(5).toString());
-            C5.setText(C_data.get(6).toString());
-            C6.setText(C_data.get(7).toString());
-            C7.setText(C_data.get(8).toString());
-            C8.setText(C_data.get(9).toString());
-
+            C_sto = C_data.get(0).toString();
+            Elv_Bias = -0.1511*(Integer.parseInt(C_sto))+1.0548;
+            View myView = root.findViewById(R.id.C_E);
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) myView.getLayoutParams();
+            params.verticalBias = (float) Elv_Bias;
+            myView.setLayoutParams(params);
+            if (Integer.parseInt(C_data.get(0).toString())<=4){
+                C_E.setColorFilter(R.color.green);
+            }else if (Integer.parseInt(C_data.get(0).toString())>=10){
+                C_E.setColorFilter(R.color.red);
+            }else{
+                C_E.setColorFilter(R.color.yellow);
+            }
         }
 
     }

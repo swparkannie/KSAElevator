@@ -1,7 +1,5 @@
 package com.ileeric.ksa.sunwoods.ui.dashboard;
 
-import android.widget.TextView;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

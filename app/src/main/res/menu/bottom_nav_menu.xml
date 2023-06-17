@@ -16,9 +16,4 @@
         android:icon="@drawable/baseline_science_24"
         android:title="창조관" />
 
-    <item
-        android:id="@+id/navigation_test"
-        android:icon="@drawable/baseline_desktop_windows_24"
-        android:title="test" />
-
 </menu>

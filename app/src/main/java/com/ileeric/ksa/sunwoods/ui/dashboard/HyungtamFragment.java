@@ -1,4 +1,6 @@
 package com.ileeric.ksa.sunwoods.ui.dashboard;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,60 +14,137 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.ileeric.ksa.sunwoods.DataFromAPI;
 import com.ileeric.ksa.sunwoods.R;
 import com.ileeric.ksa.sunwoods.databinding.FragmentHyungtamBinding;
-public class HyungtamFragment extends Fragment {
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+
+public class HyungTamFragment extends Fragment {
     double Elv_Bias =0;
-    String C_sto="";
-    private FragmentHyungtamBinding binding;
-    String HRT;
+    String H_sto="";
+
+    private @NonNull FragmentHyungtamBinding binding;
+    TextView H1 = null;
+    TextView H2 = null;
+    TextView H3 = null;
+    TextView H4 = null;
+    TextView H5 = null;
+    TextView H6 = null;
+    ImageView H_E=null;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HyungtamViewModel hyungtamViewModel =
+        HyungtamViewModel HyungtamViewModel =
                 new ViewModelProvider(this).get(HyungtamViewModel.class);
-
 
         binding = FragmentHyungtamBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        LayoutInflater lf = getActivity().getLayoutInflater();
-        View view =  lf.inflate(R.layout.fragment_hyungtam, container, false); //pass the correct layout name for the fragment
-        TextView HR = (TextView) root.findViewById(R.id.H_NumR);
-        TextView H4 = (TextView) root.findViewById(R.id.H_Num4);
-        TextView H3 = (TextView) root.findViewById(R.id.H_Num3);
-        TextView H2 = (TextView) root.findViewById(R.id.H_Num2);
-        TextView H1 = (TextView) root.findViewById(R.id.H_Num1);
-        TextView H0 = (TextView) root.findViewById(R.id.H_Num0);
-        ImageView Elv = (ImageView) root.findViewById(R.id.H_E);
-
-        DataFromAPI data = new DataFromAPI();
-        try {
-            H0.setText(data.T_data.get(2).toString());
-            H1.setText(data.T_data.get(3).toString());
-            H2.setText(data.T_data.get(4).toString());
-            H3.setText(data.T_data.get(5).toString());
-            H4.setText(data.T_data.get(6).toString());
-            HR.setText(data.T_data.get(7).toString());
-            C_sto = data.T_data.get(0).toString();
-            Elv_Bias = -0.1511*(Integer.parseInt(C_sto))+1.0548;
+        H1 = (TextView) root.findViewById(R.id.H_Num0);
+        H2 = (TextView) root.findViewById(R.id.H_Num1);
+        H3 = (TextView) root.findViewById(R.id.H_Num2);
+        H4 = (TextView) root.findViewById(R.id.H_Num3);
+        H5 = (TextView) root.findViewById(R.id.H_Num4);
+        H6 = (TextView) root.findViewById(R.id.H_NumR);
+        H_E = (ImageView) root.findViewById(R.id.H_E);
 
 
-            /*
-            ConstraintSet constraintSet = new ConstraintSet();
-            constraintSet.clone(getContext(), R.id.);
-            constraintSet.setHorizontalBias(R.id.H_E, (float) Elv_Bias);
-            constraintSet.applyTo((Constraint) root.findViewById(R.id.hyungsul));
+        HyungtamTask apiTask = new HyungtamTask("Tamgu");
 
-             */
+        apiTask.execute();
 
-        } catch (Exception e){
-            Log.e("Error","Population...");
+        return root;
+    }
+    class HyungtamTask extends AsyncTask<Integer, Void, Boolean> {
+        // Variable to store url
+        protected String mURL;
+        String result = null;
+
+        ArrayList T_data = new ArrayList();
+
+        // Constructor
+        public HyungtamTask(String task) {
+            if (task == "Tamgu")
+            {
+                mURL = "http://omoknuni.mireene.com/get2.php";
+            }
+        }
+
+        // Background work
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+            try {
+                // Open the connection
+                URL url = new URL(mURL);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                InputStream is = conn.getInputStream();
+
+                // Get the stream
+                StringBuilder builder = new StringBuilder();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line);
+                }
+
+                // Set the result
+                result = builder.toString();
+                System.out.println("RES IS\n" + result);
+                JSONObject jsonobject = new JSONObject(result);
+                System.out.println(jsonobject.length());
+                JSONObject hyungtam = jsonobject.getJSONObject("Tamgu");
+                JSONObject inElevator = hyungtam.getJSONObject("inElevator");
+                T_data.add(Integer.parseInt(inElevator.getString("sto")));
+                T_data.add(Integer.parseInt(inElevator.getString("ppl")));
+                T_data.add(Integer.parseInt(inElevator.getString("drc")));
+                T_data.add(Integer.parseInt(hyungtam.getString("T1")));
+                T_data.add(Integer.parseInt(hyungtam.getString("T2")));
+                T_data.add(Integer.parseInt(hyungtam.getString("T3")));
+                T_data.add(Integer.parseInt(hyungtam.getString("T4")));
+                T_data.add(Integer.parseInt(hyungtam.getString("T5")));
+                T_data.add(Integer.parseInt(hyungtam.getString("T6")));
+
+            } catch (Exception e) {
+                // Error calling the rest api
+                Log.e("REST_API", "GET method failed: " + e.getMessage());
+                e.printStackTrace();
+            }
+            return Boolean.TRUE;
+        }
+
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            View root = binding.getRoot();
+            H1.setText(T_data.get(3).toString());
+            H2.setText(T_data.get(4).toString());
+            H3.setText(T_data.get(5).toString());
+            H4.setText(T_data.get(6).toString());
+            H5.setText(T_data.get(7).toString());
+            H6.setText(T_data.get(8).toString());
+
+            H_sto = T_data.get(0).toString();
+            Elv_Bias = -0.1511*(Integer.parseInt(H_sto))+1.0548;
             View myView = root.findViewById(R.id.H_E);
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) myView.getLayoutParams();
-            params.verticalBias = 0.8f;
+            params.verticalBias = (float) Elv_Bias;
             myView.setLayoutParams(params);
+            if (Integer.parseInt(T_data.get(0).toString())<=4){
+                H_E.setColorFilter(R.color.green);
+            }else if (Integer.parseInt(T_data.get(0).toString())>=10){
+                H_E.setColorFilter(R.color.red);
+            }else{
+                H_E.setColorFilter(R.color.yellow);
+            }
+
         }
-        return root;
     }
 
     @Override

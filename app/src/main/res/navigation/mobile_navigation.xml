@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.ileeric.ksa.sunwoods.ui.pathInput.PathInputFragment"
+        android:name="com.ileeric.ksa.sunwoods.ui.home.FindpathFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_path_input" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.ileeric.ksa.sunwoods.ui.dashboard.HyungtamFragment"
+        android:name="com.ileeric.ksa.sunwoods.ui.dashboard.HyungTamFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_hyungtam" />
 
@@ -23,9 +23,4 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_changjo" />
 
-    <fragment
-        android:id="@+id/navigation_test"
-        android:name="com.ileeric.ksa.sunwoods.ui.Test.TestpageFragment"
-        android:label="Test"
-        tools:layout="@layout/fragment_testpage" />
 </navigation>
