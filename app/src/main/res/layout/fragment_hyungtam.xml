@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dashboard.HyungtamFragment">
+
+    <FrameLayout
+        android:id="@+id/hyungsul"
+        android:layout_width="310dp"
+        android:layout_height="530dp"
+        android:background="@drawable/sixstory"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/H_Header"
+        app:layout_constraintVertical_bias="1" />
+
+    <TextView
+        android:id="@+id/H_Header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple"
+        android:fontFamily="@font/bunny"
+        android:gravity="center_horizontal"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="KSA Elevator"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/H_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/koreanf"
+        android:text="형설관 Elevator"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/H_Header"
+        app:layout_constraintVertical_bias="0.146" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.74">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp">
+
+            <TextView
+                android:id="@+id/H_Num_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="대기 인원수"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/H_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="형설관 기준"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/T_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="탐구관 기준"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/H_NumR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="10"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/H_R"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="R"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/T_X"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="X"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/H_Num4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="10"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/H_4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="4"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/T_5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="5"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/H_Num3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="10"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/H_3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="3"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/T_4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="4"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/H_Num2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="10"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/H_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="2"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/T_3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="3"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/H_Num1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="10"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/H_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="1"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/T_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="2"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/H_Num0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="10"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/H_X"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="X"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/T_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/koreanf"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:text="1"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+        </TableRow>
+    </TableLayout>
+
+    <ImageView
+        android:id="@+id/H_E"
+        android:layout_width="58dp"
+        android:layout_height="65dp"
+        android:src="@drawable/baseline_elevator_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.912"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.478" />
+</androidx.constraintlayout.widget.ConstraintLayout>
